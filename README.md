@@ -87,9 +87,13 @@ from hr where termdate1 > getdate() ---we take it that this is the period when t
 ----1. What is the gender breakdown of employees in the company?
 
 select gender,count(gender) as Countpergender
+
 from hr
+
 group by gender
+
 order by gender
+
 
 select gender,count(gender) as Countpergender
 from hr
