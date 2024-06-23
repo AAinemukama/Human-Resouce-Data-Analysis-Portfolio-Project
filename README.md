@@ -217,7 +217,7 @@ where termdate1 > getdate() or termdate1 is null
 group by age_group,gender
 order by age_group,gender
 ```
-- These methods provide insights into the age distribution of current employees, helping to understand the demographic composition of the workforce.
+These methods provide insights into the age distribution of current employees, helping to understand the demographic composition of the workforce.
   
 ----4. How many employees work at the headquarters vs remote locations?
 select location 
