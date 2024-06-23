@@ -50,8 +50,8 @@ The initial steps involved data cleaning and standardization:
 11. Tenure distribution by department
 12. Years of service distribution
 
-## SQL Queries used
-# Data Preparation and Standardization
+# SQL Queries used
+## Data Preparation and Standardization
 
 select *
 from hr
@@ -100,7 +100,7 @@ from hr where termdate1 > getdate() ---we take it that this is the period when t
 
 ## QUESTIONS TO BE ANSWERED USING THE ANALYSIS
 
-# 1. What is the gender breakdown of employees in the company?
+### 1. What is the gender breakdown of employees in the company?
 
 select gender,count(gender) as Countpergender
 
