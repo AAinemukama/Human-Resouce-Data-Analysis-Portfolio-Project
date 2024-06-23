@@ -61,6 +61,7 @@ from hr
 ```
 
 ### Ensuring Date Columns Have a Consistent DATE Data Type
+```sql
 
 select birthdate
 from hr
@@ -85,9 +86,7 @@ add termdate1 date
 update hr
 set termdate1= cast(termdate as date)
 where termdate is not null
-
-select termdate1
-from hr
+```
 
 alter table hr
 add age int
