@@ -143,14 +143,21 @@ group by race
 order by countperrace desc
 ```
 
-----3. What is the age distribution of employees in the company?
+### 3. What is the age distribution of employees in the company?
+#### Age Range of Current employees (This query retrieves the youngest and oldest ages among current employees ,excluding those with past termination dates).
+```sql
+
 select min(age) as youngest, max(age) as oldest
 from hr
 where termdate1 > getdate() or termdate1 is null
+```
 
-----we need to group our ages into different age groups and this will be done in different ways
+#### Grouping Employees by Age
+##### This section describes two methods for grouping employees into different age categories and analyzing the distribution.
 
---a) Using a subquery
+###### Method A: Using a subquery
+```sql
+
 select age_group, count(*) as group_count 
 from
 (
@@ -167,12 +174,18 @@ from hr
 where termdate1 > getdate() or termdate1 is null
 ) as subquery
 group by age_group
-order by age_group 
+order by age_group
+```
 
---b) Creating a new column called Age group 
-
+###### Methode B: Creating a New Column 
+- Add Age Group Column
+```sql
 alter table hr
 add age_group nvarchar(20)
+```
+
+- Populate Age Group Column
+```sql
 
 update hr
 set age_group =
@@ -184,19 +197,28 @@ set age_group =
   when age>=55 AND age <=64 then '55-64'
   else '65+'
   end
+```
+- Count Employees in Each Age Group
+```sql
 
 select age_group, count(age_group) as age_groupcount
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by age_group
 order by age_group desc
+```
+
+- Count Employees in Eacg Age group by Gender
+```sql
 
 select age_group, gender, count(*) as countofagegrppergender
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by age_group,gender
 order by age_group,gender
-
+```
+- These methods provide insights into the age distribution of current employees, helping to understand the demographic composition of the workforce.
+  
 ----4. How many employees work at the headquarters vs remote locations?
 select location 
 from hr
