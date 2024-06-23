@@ -96,26 +96,22 @@ set full_name=concat(first_name,' ', last_name)
 select *
 from hr where termdate1 > getdate() ---we take it that this is the period when their contracts expire
 
---QUESTIONS TO BE ANSWERED USING THE ANALYSIS
+## QUESTIONS TO BE ANSWERED USING THE ANALYSIS
 
-----1. What is the gender breakdown of employees in the company?
+# 1. What is the gender breakdown of employees in the company?
 
 select gender,count(gender) as Countpergender
 
 from hr
 
-group by gender
-
-order by gender
-
-
-select gender,count(gender) as Countpergender
-from hr
 where termdate1 > getdate() or termdate1 is null
+
 group by gender
+
 order by gender
 
-----2. What is the race/ethnicity breakdown of employees in the company? -we shall concentreate on the current employees and exclude the fomer ones
+# 2. What is the race/ethnicity breakdown of employees in the company? -we shall concentreate on the current employees and exclude the fomer ones
+
 select race, count(race) as countperrace
 from hr
 group by race
