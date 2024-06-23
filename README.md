@@ -54,9 +54,11 @@ The initial steps involved data cleaning and standardization:
 ## Data Preparation and Standardization
 
 ### Retriveing all data from the HR table to provide a complete view of the dataset.
+```sql
 
 select *
 from hr
+```
 
 ### Ensuring Date Columns Have a Consistent DATE Data Type
 
