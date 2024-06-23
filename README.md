@@ -317,3 +317,5 @@ where termdate1 > getdate() or termdate1 is null
 group by datediff(year, hire_date, getdate())
 order by years_of_service desc
 ```
+## Data Visualization
+- Click the link to download the Power BI dashboard (https://github.com/AAinemukama/Data-Visualizations-Power-BI-and-Excel/blob/main/Human_Resource.pbix)
