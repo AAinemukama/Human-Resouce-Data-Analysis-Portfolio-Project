@@ -153,7 +153,7 @@ where termdate1 > getdate() or termdate1 is null
 ```
 
 #### Grouping Employees by Age
-##### This section describes two methods for grouping employees into different age categories and analyzing the distribution.
+##### This section describes two methods for grouping employees into different age categories and analyzing the distribution. These methods provide insights into the age distribution of current employees, helping to understand the demographic composition of the workforce.
 
 ###### Method A: Using a subquery
 ```sql
@@ -217,37 +217,53 @@ where termdate1 > getdate() or termdate1 is null
 group by age_group,gender
 order by age_group,gender
 ```
-These methods provide insights into the age distribution of current employees, helping to understand the demographic composition of the workforce.
-  
-----4. How many employees work at the headquarters vs remote locations?
-select location 
-from hr
+
+### 4. How many employees work at the headquarters vs remote locations?
+#### Employee Distribution by Location
+##### This query counts the number of current employees (excluding those with past termination dates) at each location, providing insights into the distribution of the workforce across different locations
+```sql
 
 select location, count(*) as countperlocation
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by location
+```
 
-----5. What is the average length of employment for employees who have been terminated?
+### 5. What is the average length of employment for employees who have been terminated?
+#### Average Length of Employment for Terminated Employees-This helps in understanding the typical duration of employment for those who have left the company
+```sql
+
 select avg(datediff(year,hire_date,termdate1)) as avgyrsofemplymnt
 from hr
 where termdate1 <= getdate() and termdate1 is not null
+```
 
--- 6. How does the gender distribution vary across departments?
+### 6. How does the gender distribution vary across departments?
+#### Gender Distribution by Department
+```sql
+
 select department, gender, count(gender) as countdept
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by department,gender
 order by department
+```
 
--- 7. What is the distribution of job titles across the company?
+### 7. What is the distribution of job titles across the company?
+#### Job Title Distribution- This helps in understanding the prevalence of different job titles among the current workforce.
+```sql
+
 select jobtitle, count(jobtitle) as countjobtitle
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by jobtitle
 order by countjobtitle desc
+```
 
--- 8. Which department has the highest turnover rate?
+### 8. Which department has the highest turnover rate?
+#### Turnover Rate by Department- This helps in identifying which departments have the highest turnover rates, providing insights into employee retention and departmental stability.
+```sql
+
 select department,total_count,terminated_count,(terminated_count *100)/total_count as turnover_rate 
 from (
 select department,
@@ -256,15 +272,23 @@ select department,
     from hr
     group by department) as subquery
     order by turnover_rate desc
+```
 
--- 9. What is the distribution of employees across locations by city and state?
+### 9. What is the distribution of employees across locations by city and state?
+#### Employee Distribution by State- This helps in understanding how employees are distributed across various states
+```sql
+
 select location_state, count(*) as countbystate
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by location_state
 order by countbystate desc
+```
 
--- 10. How has the company's employee count changed over time based on hire and term dates?
+### 10. How has the company's employee count changed over time based on hire and term dates?
+#### Annual Hires and Terminations Analysis- This helps in understanding the overall hiring and retention trends over the years.
+```sql
+
 select year, hires, terminations, hires-terminations as net_change, (hires-terminations)*100/hires as net_change_percent
 from(
 select YEAR(hire_date) as year, count(*) as hires, sum(case when termdate1<=getdate() and termdate1 is not null then 1 else 0 end) as terminations
@@ -272,15 +296,20 @@ from hr
 group by YEAR(hire_date)
 ) as subquery	
 order by year asc
+```
 
--- 11. What is the tenure distribution for each department?
+### 11. What is the tenure distribution for each department?
+#### Tenure Distribution by Department-  It helps in understanding the tenure distribution across different departments, highlighting which departments have longer or shorter average employee tenures
+```sql
+
 select department, avg(datediff(year,hire_date,termdate1)) as avgyrsofemplymnt
 from hr
 where termdate1 <= getdate() and termdate1 is not null
 group by department
 order by avgyrsofemplymnt desc
-
--- 12. How many employees have worked with the comapany for each specific number of years?
+```
+### 12. How many employees have worked with the comapany for each specific number of years?
+#### Employee Tenure Distribution- Understanding the tenure distribution helps in planning for future workforce needs and developing effective retention strategies.
 select datediff(year, hire_date, getdate()) as years_of_service,count(*) as employee_count
 from hr
 where termdate1 > getdate() or termdate1 is null
