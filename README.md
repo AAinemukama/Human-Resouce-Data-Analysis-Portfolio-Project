@@ -53,8 +53,12 @@ The initial steps involved data cleaning and standardization:
 # SQL Queries used
 ## Data Preparation and Standardization
 
+### Retriveing all data from the HR table to provide a complete view of the dataset.
+
 select *
 from hr
+
+### Ensuring Date Columns Have a Consistent DATE Data Type
 
 select birthdate
 from hr
