@@ -51,6 +51,8 @@ The initial steps involved data cleaning and standardization:
 12. Years of service distribution
 
 ## SQL Queries used
+# Data Preparation and Standardization
+
 select *
 from hr
 
