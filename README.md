@@ -310,8 +310,10 @@ order by avgyrsofemplymnt desc
 ```
 ### 12. How many employees have worked with the comapany for each specific number of years?
 #### Employee Tenure Distribution- Understanding the tenure distribution helps in planning for future workforce needs and developing effective retention strategies.
+```sql
 select datediff(year, hire_date, getdate()) as years_of_service,count(*) as employee_count
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by datediff(year, hire_date, getdate())
 order by years_of_service desc
+```
