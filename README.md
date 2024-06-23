@@ -21,6 +21,20 @@ The initial steps involved data cleaning and standardization:
 - Altering column data types for dates (birthdate, hire_date, termdate)
 - Creating derived columns (age, full_name, age_group)
 
+## Description of fields
+- Employment ID as id
+- Date of birth as birthdate
+- Gender as gender
+- Race as race
+- Department as department
+- Job Title as jobtitle
+- Location of office or work place as loation
+- Date of hire of employee as hire_date
+- Date of termination  of employee as termdate1
+- City of location of work place as location_city
+- Age of employee as age
+- Age group of employee as age_group
+
 ## Key Analyses
 
 1. Gender distribution
