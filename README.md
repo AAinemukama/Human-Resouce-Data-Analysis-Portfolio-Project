@@ -83,7 +83,9 @@ select *
 from hr where termdate1 > getdate() ---we take it that this is the period when their contracts expire
 
 --QUESTIONS TO BE ANSWERED USING THE ANALYSIS
+
 ----1. What is the gender breakdown of employees in the company?
+
 select gender,count(gender) as Countpergender
 from hr
 group by gender
