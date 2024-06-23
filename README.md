@@ -88,6 +88,9 @@ set termdate1= cast(termdate as date)
 where termdate is not null
 ```
 
+### Adding and Populating Age and Full Name Columns
+```sql
+
 alter table hr
 add age int
 
@@ -100,35 +103,45 @@ add full_name varchar(100)
 update hr
 set full_name=concat(first_name,' ', last_name)
 
+```
+### Retrieve Employees with Upcoming Contract Expirations
+```sql
+
 select *
 from hr where termdate1 > getdate() ---we take it that this is the period when their contracts expire
+```
 
 ## QUESTIONS TO BE ANSWERED USING THE ANALYSIS
 
 ### 1. What is the gender breakdown of employees in the company?
+```sql
 
 select gender,count(gender) as Countpergender
-
 from hr
-
 where termdate1 > getdate() or termdate1 is null
-
 group by gender
-
 order by gender
+```
 
-# 2. What is the race/ethnicity breakdown of employees in the company? -we shall concentreate on the current employees and exclude the fomer ones
+### 2. What is the race/ethnicity breakdown of employees in the company? These queries help in understanding the diversity of the workforce by providing insights into the racial and ethnic composition of both the overall employee base and the current employees.
+
+#### Overall 
+```sql
 
 select race, count(race) as countperrace
 from hr
 group by race
 order by countperrace desc
+```
+#### Current Employees
+```sql
 
 select race, count(race) as countperrace
 from hr
 where termdate1 > getdate() or termdate1 is null
 group by race
 order by countperrace desc
+```
 
 ----3. What is the age distribution of employees in the company?
 select min(age) as youngest, max(age) as oldest
